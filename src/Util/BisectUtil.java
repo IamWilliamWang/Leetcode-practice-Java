@@ -4,6 +4,7 @@ import java.util.List;
 
 /**
  * Bisection algorithms.
+ * @author William Wang. June 11th, 2020.
  */
 class Bisect {
     /**
@@ -43,9 +44,9 @@ class Bisect {
 
     /**
      * Insert item x in list a, and keep it sorted assuming a is sorted.
-     * <p>
+     * 
      * If x is already in a, insert it to the right of the rightmost x.
-     * <p>
+     * 
      * Optional args lo (default 0) and hi (default len(a)) bound the slice of a to be searched.
      */
     public static void insortRight(List<Integer> a, int x, int lo, int hi) {
@@ -61,11 +62,11 @@ class Bisect {
 
     /**
      * Return the index where to insert item x in list a, assuming a is sorted.
-     * <p>
+     * 
      * The return value i is such that all e in a[:i] have e <= x, and all e in
      * a[i:] have e > x.  So if x already appears in the list, a.insert(x) will
      * insert just after the rightmost x already there.
-     * <p>
+     * 
      * Optional args lo (default 0) and hi (default len(a)) bound the
      * slice of a to be searched.
      */
@@ -93,9 +94,9 @@ class Bisect {
 
     /**
      * Insert item x in list a, and keep it sorted assuming a is sorted.
-     * <p>
+     * 
      * If x is already in a, insert it to the left of the leftmost x.
-     * <p>
+     * 
      * Optional args lo (default 0) and hi (default len(a)) bound the
      * slice of a to be searched.
      */
@@ -112,11 +113,11 @@ class Bisect {
 
     /**
      * Return the index where to insert item x in list a, assuming a is sorted.
-     * <p>
+     * 
      * The return value i is such that all e in a[:i] have e < x, and all e in
      * a[i:] have e >= x.  So if x already appears in the list, a.insert(x) will
      * insert just before the leftmost x already there.
-     * <p>
+     * 
      * Optional args lo (default 0) and hi (default len(a)) bound the
      * slice of a to be searched.
      */
@@ -158,7 +159,7 @@ public class BisectUtil {
      * @param x
      * @return
      */
-    public static int findLt(List<Integer> collection, int x) {
+    public static int find_lt(List<Integer> collection, int x) {
         var i = Bisect.bisectLeft(collection, x);
         if (i != 0)
             return collection.get(i - 1);
@@ -172,7 +173,7 @@ public class BisectUtil {
      * @param x
      * @return
      */
-    public static int findLe(List<Integer> collection, int x) {
+    public static int find_le(List<Integer> collection, int x) {
         var i = Bisect.bisectRight(collection, x);
         if (i != 0)
             return collection.get(i - 1);
@@ -186,7 +187,7 @@ public class BisectUtil {
      * @param x
      * @return
      */
-    public static int findGt(List<Integer> collection, int x) {
+    public static int find_gt(List<Integer> collection, int x) {
         var i = Bisect.bisectRight(collection, x);
         if (i != collection.size())
             return collection.get(i);
@@ -200,7 +201,7 @@ public class BisectUtil {
      * @param x
      * @return
      */
-    public static int findGe(List<Integer> collection, int x) {
+    public static int find_ge(List<Integer> collection, int x) {
         var i = Bisect.bisectLeft(collection, x);
         if (i != collection.size())
             return collection.get(i);

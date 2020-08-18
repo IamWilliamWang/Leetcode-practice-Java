@@ -8,13 +8,13 @@ import java.util.function.Function;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
-class Solution {
+class OfficalSolution {
     private static final int INF = 1 << 20;
     private Map<String, Integer> wordId; // 单词到id的映射
     private ArrayList<String> idWord; // id到单词的映射
     private ArrayList<Integer>[] edges; // 图的边
 
-    public Solution() {
+    public OfficalSolution() {
         wordId = new HashMap<>();
         idWord = new ArrayList<>();
     }
@@ -219,7 +219,7 @@ public class FindLadders {
         var sol = new FindLadders();
         var functions = new Tuple<Function<Tuple<Object>, List<List<String>>>>(
                 (tuple) -> sol.findLadders((String) tuple.getFirst(), (String) tuple.getSecond(), (List<String>) tuple.getThird()),
-                (tuple) -> new Solution().findLadders((String) tuple.getFirst(), (String) tuple.getSecond(), (List<String>) tuple.getThird()));
+                (tuple) -> new OfficalSolution().findLadders((String) tuple.getFirst(), (String) tuple.getSecond(), (List<String>) tuple.getThird()));
         var funcNames = new Tuple<String>("findLadders", "findLadders_offical");
         var argument = new Tuple<Object>("a", "c", Arrays.asList("a", "b", "c"));
         speedtest(functions, funcNames, argument);

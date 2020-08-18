@@ -1,6 +1,9 @@
 package Util;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Collections;
+import java.util.List;
 import java.util.stream.IntStream;
 
 public class Tuple<T> extends ArrayList<T> implements Collection<T>, List<T>, Iterable<T> {
@@ -29,7 +32,7 @@ public class Tuple<T> extends ArrayList<T> implements Collection<T>, List<T>, It
 
     @Override
     public boolean equals(Object obj) {
-        try {
+        if (obj instanceof Tuple) {
             Tuple<T> tuple = (Tuple<T>) obj;
             if (tuple.size() != this.size())
                 return false;
@@ -38,8 +41,12 @@ public class Tuple<T> extends ArrayList<T> implements Collection<T>, List<T>, It
                     return false;
             }
             return true;
-        } catch (Exception e) {
-            return false;
         }
+        return false;
+    }
+
+    @Override
+    public String toString() {
+        return super.toString().replace("[", "(").replace("]", ")");
     }
 }

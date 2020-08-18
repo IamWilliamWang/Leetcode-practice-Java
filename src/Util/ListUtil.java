@@ -3,6 +3,15 @@ package Util;
 import java.util.*;
 import java.util.stream.Collectors;
 
+/**
+ * 常用链表算法的实现
+ * 1、createListWithHead 使用val数组创建有头的链表
+ * 2、createListWithoutHead 使用val数组创建无头的链表
+ * 3、iterator 链表的迭代器
+ * 4、traverse 遍历链表，返回遍历结果
+ * @author William Wang. June 7th, 2020.
+ * @version v2.0
+ */
 public class ListUtil {
     /**
      * 创建<bold>有头节点</bold>的单向链表。头节点存储链表长度
@@ -11,10 +20,9 @@ public class ListUtil {
      */
     public static ListNode<Integer> createListWithHead(List<Integer> valList) {
         ListNode<Integer> head = new ListNode<>(valList.size());
-        var previous = head;
-        for (var val : valList) {
-            var node = new ListNode<>(val);
-            previous.next = node;
+        ListNode<Integer> previous = head;
+        for (int val : valList) {
+            previous.next = new ListNode<>(val);
             previous = previous.next;
         }
         return head;
@@ -35,14 +43,7 @@ public class ListUtil {
      * @return
      */
     public static ListNode<Integer> createListWithoutHead(List<Integer> valList) {
-        var head = new ListNode<>(valList.size());
-        var previous = head;
-        for (var val : valList) {
-            var node = new ListNode<>(val);
-            previous.next = node;
-            previous = previous.next;
-        }
-        return head.next;
+        return createListWithHead(valList).next;
     }
 
     /**
@@ -51,7 +52,7 @@ public class ListUtil {
      * @return
      */
     public static ListNode<Integer> createListWithoutHead(int[] valList) {
-        return createListWithoutHead(Arrays.stream(valList).boxed().collect(Collectors.toList()));
+        return createListWithHead(valList).next;
     }
 
     /**
@@ -87,7 +88,7 @@ public class ListUtil {
             public T next() {
                 if (!hasNext())
                     throw new NoSuchElementException();
-                var nextElement = nowNode.next.val;
+                T nextElement = nowNode.next.val;
                 if (previous == null || previous.next != nowNode.next)
                     previous = nowNode;
                 nowNode = nowNode.next;
@@ -133,7 +134,7 @@ public class ListUtil {
      * @return
      */
     public static <T> Iterator<T> iterator(ListNode<T> headNode, int start) {
-        var it = ListUtil.iterator(headNode);
+        Iterator<T> it = ListUtil.iterator(headNode);
         for (int i = 0; i < start && it.hasNext(); i++) {
             it.next();
         }
@@ -147,10 +148,9 @@ public class ListUtil {
      * @return
      */
     public static <T> List<T> traverse(ListNode<T> headNode) {
-        var iterator = headNode.iterator();
         List<T> result = new ArrayList<>();
-        while (iterator.hasNext())
-            result.add(iterator.next());
+        for (T val : headNode)
+            result.add(val);
         return result;
     }
 
@@ -161,22 +161,22 @@ public class ListUtil {
     public static void main(String[] args) {
         // 测试createListWithHead
         System.out.println("------ testing createListWithHead ------");
-        var nodes = new ArrayList<Integer>();
+        ArrayList<Integer> nodes = new ArrayList<Integer>();
         Collections.addAll(nodes, 8, 7, 6, 5, 4, 3, 2, 1);
-        var head = createListWithHead(nodes);
+        ListNode<Integer> head = createListWithHead(nodes);
         head = createListWithHead(new int[] {8, 7, 6, 5, 4, 3, 2, 1});
         // 测试traverse
         System.out.println("------ testing traverse ------");
         System.out.println(ListUtil.traverse(head));
         // 测试iterator
         System.out.println("------ testing iterator ------");
-        var it = ListUtil.iterator(head);
+        Iterator<Integer> it = ListUtil.iterator(head);
         while (it.hasNext())
             System.out.print(it.next() + ", ");
         System.out.println();
         // 测试iterator(islice)
         System.out.println("------ testing iterator(islice) ------");
-        var itSlice = ListUtil.iterator(head, 6);
+        Iterator<Integer> itSlice = ListUtil.iterator(head, 6);
         while (itSlice.hasNext())
             System.out.print(itSlice.next() + ", ");
         System.out.println();
